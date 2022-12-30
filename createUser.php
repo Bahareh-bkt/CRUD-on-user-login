@@ -1,7 +1,10 @@
 <?php
 include 'includes/header.php';
 include 'includes/footer.php';
+include 'functions.php';
+createUser();
 ?>
+
     <div class="container">
         <div class="col-sm-6">
             <h4 class="text-center">Create User</h4>
