@@ -26,5 +26,16 @@ function createUser() {
     }
 }
 
+function readUser() {
+    global $connect;
+    $query = "SELECT * from users ";
+    $result = mysqli_query($connect, $query);
+    if(!$result) {
+        die("Connection Faild".mysqli_error($connect));
+    }
+    while($row = mysqli_fetch_assoc($result)) {
+        print_r($row);
+    }
+}
 
 ?>
