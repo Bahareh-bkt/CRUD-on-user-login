@@ -38,4 +38,45 @@ function readUser() {
     }
 }
 
+
+function updateUser() {
+    global $connect;
+
+    if(isset($_POST['submit'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $id = $_POST['id'];
+
+        $hashForm = "$2y$10$";
+        $salt = "iusesomecrazystringhere";
+        $hash_salt = $hashForm . $salt ;
+        $password = crypt($password, $hash_salt);
+
+        $query = "UPDATE users SET ";
+        $query .= "username = '$username',";
+        $query .= "password = '$password'";
+        $query .= "WHERE id = $id";
+
+        $result = mysqli_query($connect, $query);
+    if(!$result) {
+        die("Connection Faild". mysqli_error($connect));
+    } else {
+        echo "Record Updated";
+    }
+
+    }
+}
+
+function userID(){
+    global $connect;
+    $query = "SELECT * from users ";
+    $result = mysqli_query($connect, $query);
+    if(!$result) {
+        die("Connection Faild".mysqli_error($connect));
+    }
+    while($row = mysqli_fetch_assoc($result)) {
+        $id = $row['id'];
+        echo "<option value='$id'>$id</option>";
+    }
+}
 ?>
