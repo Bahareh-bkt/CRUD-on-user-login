@@ -79,4 +79,24 @@ function userID(){
         echo "<option value='$id'>$id</option>";
     }
 }
+
+function deleteUser(){
+    global $connect;
+
+    if(isset($_POST['submit'])){
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $id = $_POST['id'];
+
+        $query = "DELETE from users ";
+        $query .= "WHERE id = $id";
+
+        $result = mysqli_query($connect, $query);
+        if(!$result){
+            die("Query Faild".mysqli_error($connect));
+        } else {
+            echo "Record deleted Successfully";
+        }
+    }
+}
 ?>
